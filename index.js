@@ -44,8 +44,11 @@ client.connect((err) => {
   });
 
   app.post("/items", (req, res) => {
+  
     const category = req.body.category;
-    productCollection.find(category).toArray((err, result) => res.send(result));
+    if(category === "") {productCollection.find().toArray((err, result) => res.send(result))}
+    else {productCollection.find(category).toArray((err, result) => res.send(result))}
+    
   });
 
   app.get("/allItems", (req, res) => {
